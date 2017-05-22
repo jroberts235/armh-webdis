@@ -5,7 +5,7 @@ MAINTAINER Jeff Roberts <https://github.com/jroberts235>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install wget make gcc libc6-dev libevent-dev redis-server && \
+    apt-get install wget make gcc libc6-dev libevent-dev && \
     wget --no-check-certificate https://github.com/nicolasff/webdis/archive/0.1.1.tar.gz -O webdis-0.1.1.tar.gz && \
     tar -xvzf webdis-0.1.1.tar.gz && \
     cd webdis-0.1.1 && make && make install && cd .. && \
@@ -14,6 +14,6 @@ RUN apt-get update && \
 
 COPY ./etc/webdis.prod.json /etc/webdis/
 
-CMD /etc/init.d/redis-server start && /usr/local/bin/webdis /etc/webdis/webdis.prod.json
+CMD /usr/local/bin/webdis /etc/webdis/webdis.prod.json
 
 EXPOSE 7379
